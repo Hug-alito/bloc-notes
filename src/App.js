@@ -9,7 +9,7 @@ const { Header, Content, Sider } = Layout;
 
 const App = () => {
   const [notes, setNotes] = useState([]);
-  const [markdownText, setMarkdownText] = useState('');
+  const [selectedNote, setSelectedNote] = useState(null);
 
   useEffect(() => {
     // Load notes from localStorage on app load
@@ -23,7 +23,7 @@ const App = () => {
   }, [notes]);
 
   const handleNoteSelect = (note) => {
-    setMarkdownText(note.content);
+    setSelectedNote(note);
   };
 
   const handleAddNote = (newNoteTitle) => {
@@ -33,12 +33,12 @@ const App = () => {
       content: '',
     };
     setNotes([...notes, newNote]);
-    setMarkdownText('');
+    setSelectedNote(newNote);
   };
 
   const handleSave = (markdownValue) => {
     // Find the current note being edited
-    const updatedNote = notes.find((note) => note.content === markdownText);
+    const updatedNote = notes.find((note) => note === selectedNote);
     if (updatedNote) {
       // Update the note content with the new markdown value
       updatedNote.content = markdownValue;
@@ -54,8 +54,8 @@ const App = () => {
           <NoteList notes={notes} onSelect={handleNoteSelect} onAddNote={handleAddNote} />
         </Sider>
         <Content className="app-content">
-          <NoteDisplay markdownText={markdownText} />
-          <MarkdownInput markdownText={markdownText} setMarkdownText={setMarkdownText} onSave={handleSave} />
+          <NoteDisplay selectedNote={selectedNote} />
+          <MarkdownInput markdownValue={selectedNote?.content} onSave={handleSave} />
         </Content>
       </Layout>
     </Layout>

@@ -1,7 +1,9 @@
+// NoteList.js
+
 import React, { useState } from 'react';
 import { List, Button, Input } from 'antd';
 
-const NoteList = ({ notes, onSelect, onNewNote, onAddNote }) => {
+const NoteList = ({ notes, onSelect, onAddNote }) => {
   const [newNoteTitle, setNewNoteTitle] = useState('');
 
   const handleClick = (note) => {
@@ -14,10 +16,10 @@ const NoteList = ({ notes, onSelect, onNewNote, onAddNote }) => {
       setNewNoteTitle('');
     }
   };
-  
+
   return (
     <div className="note-list">
-      <h2>Your Notes</h2>
+      <h2 style={{ color: 'white' }}>Your Notes</h2>
       <Input
         placeholder="Enter note title"
         value={newNoteTitle}
@@ -28,8 +30,9 @@ const NoteList = ({ notes, onSelect, onNewNote, onAddNote }) => {
         dataSource={notes}
         renderItem={(note) => (
           <List.Item className="note-item" onClick={() => handleClick(note)}>
-            <h3>{note.title}</h3>
-            <p>{note.content.slice(0, 15)}...</p>
+            <h3 style={{ cursor: 'pointer', color: 'white' }}>{note.title}</h3>
+            {/* Apply CSS style to set the color of the note text to white */}
+            <p style={{ color: 'white' }}>{note.content.slice(0, 15)}...</p>
           </List.Item>
         )}
       />
