@@ -1,3 +1,5 @@
+// App.js
+
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Layout } from 'antd';
@@ -55,7 +57,10 @@ const App = () => {
         </Sider>
         <Content className="app-content">
           <NoteDisplay selectedNote={selectedNote} />
-          <MarkdownInput markdownValue={selectedNote?.content} onSave={handleSave} />
+          <MarkdownInput
+            markdownValue={selectedNote?.content}
+            onSave={handleSave}
+          />
         </Content>
       </Layout>
     </Layout>
